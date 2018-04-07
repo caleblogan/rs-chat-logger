@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost/rs-chat-logger');
 
 const apiRoutes = require('./src/routes');
 const { http404Handler, errorHandler } = require('./src/helpers/middleware');
+const { auth } = require('./src/helpers/auth');
 
 
 app.use(morgan('tiny'));
@@ -17,6 +18,8 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use(auth);
 
 app.use('/api/v1', apiRoutes);
 

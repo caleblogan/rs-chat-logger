@@ -1,6 +1,7 @@
-const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
-const { HTTP404 } = require('../helpers/exceptions');
+const User = require('../models/user');
+const { HTTP404, ServerError } = require('../helpers/exceptions');
 
 
 /**
@@ -17,6 +18,23 @@ function find(req, res) {
     });
 }
 
+function create(req, res) {
+  const { username, password } = req.body;
+  const user = new User({
+    username,
+    password,
+    api_token: jwt.sign({username}, 'superdupersecretman'), // TODO: put in env or config file
+  });
+  return user.save()
+    .then(user => {
+      res.json({ token: user.api_token });
+      // res.json(req.body)
+    })
+    .catch(error => {
+      throw new ServerError(error);
+    });
+}
+
 function get(req, res, next) {
   return User.findOne({'username': req.params.username}, '_id username')
     .then(user => {
@@ -30,5 +48,6 @@ function get(req, res, next) {
 
 module.exports = {
   find,
+  create,
   get,
 };

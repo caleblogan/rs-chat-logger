@@ -12,7 +12,6 @@ const {toMongoObjectId} = require("../helpers/utils");
 
 function find(req, res) {
   return Message.find()
-    // .select('_id username')
     .then(messages => {
       res.json(messages)
     });
@@ -22,7 +21,6 @@ function create(req, res) {
   const {
     username, message: _message, type, locationName, world, tile
   } = req.body;
-  console.log('username:', username);
   const message = new Message({
     username,
     message: _message,
