@@ -17,13 +17,16 @@ class Header extends Component {
 
     return (
       <Menu className={styles.Header} fixed="top" borderless>
-        <Menu.Item as={Link} to="/" header>
+        <Menu.Item as={Link} to="/" header style={{borderLeft: '4px solid #511E7A'}}>
           {/*<Image*/}
           {/*size='mini'*/}
           {/*src='/logo.png'*/}
           {/*style={{ marginRight: '1.5em' }}*/}
           {/*/>*/}
           Rs Chat Logger
+        </Menu.Item>
+        <Menu.Item as={Link} to="/stream">
+          Message Stream
         </Menu.Item>
       </Menu>
     );
