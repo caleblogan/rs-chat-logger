@@ -10,9 +10,6 @@ const userSchema = new Schema({
   admin: { type: Boolean, default: false },
   approved: { type: Boolean, default: false },
   api_token: String,
-  locationName: String,
-  ip: String,
-  MAC: String,
   created_at: Date,
   updated_at: Date,
 });
