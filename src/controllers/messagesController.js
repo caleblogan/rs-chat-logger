@@ -1,4 +1,5 @@
 const Message = require('../models/message');
+const Bot = require('../models/bot');
 const { ParseError, HTTP404 } = require('../helpers/exceptions');
 const { parseMongoError } = require("../helpers/validation");
 const {toMongoObjectId} = require("../helpers/utils");
@@ -17,11 +18,13 @@ function find(req, res) {
     });
 }
 
-function create(req, res) {
+async function create(req, res) {
   const {
-    username, message: _message, type, locationName, world, tile
+    username, message: _message, type, locationName, world, tile, client_id,
   } = req.body;
+  const bot = await Bot.findOne({client_id}).exec();
   const message = new Message({
+    bot,
     username,
     message: _message,
     type,

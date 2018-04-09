@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
+  bot: { type: Schema.Types.ObjectId, required: true, ref: 'Bot' },
   username: { type: String, required: true },
   message: { type: String, required: true },
   type: String,
