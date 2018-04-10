@@ -13,6 +13,6 @@ export const selectors = {
     isLoggedIn: state => authSelectors.isLoggedIn(state.auth),
   },
   messages: {
-    messageList: state => messagesSelectors.messageList(state.messages),
+    messageStreamList: state => messagesSelectors.messageStreamList(state.messages),
   },
 };

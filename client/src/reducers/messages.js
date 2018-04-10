@@ -24,7 +24,7 @@ const defaultMessages = {
   },
 };
 
-function messages(state = defaultMessages, action) {
+function messageStream(state = defaultMessages, action) {
   switch (action.type) {
     case actionTypes.RECEIVE_MESSAGES:
       return {
@@ -37,9 +37,9 @@ function messages(state = defaultMessages, action) {
 }
 
 export default combineReducers({
-  messages,
+  messageStream,
 });
 
 // Selectors
-export const messageList = state =>
-  Object.keys(state.messages).map(id => state.messages[id]);
+export const messageStreamList = state =>
+  Object.keys(state.messageStream).map(id => state.messageStream[id]);

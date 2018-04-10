@@ -15,12 +15,13 @@ function receiveMessages(messages) {
 let socket;
 export function startMessageStream() {
   return (dispatch) => {
-    socket = new WebSocket('ws://localhost:8000' + '/echo');
+    socket = new WebSocket('ws://localhost:8000' + '/api/v1/messages/stream');
 
     socket.addEventListener('message', event => {
-      console.log('Message from server ', event.data);
       const message = JSON.parse(event.data);
-      dispatch(receiveMessages(utils.transformPayload([message], '_id')));
+      dispatch(
+        receiveMessages(utils.transformPayload([message], '_id'))
+      );
     });
   }
 }
