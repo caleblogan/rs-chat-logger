@@ -11,7 +11,7 @@ const MessageList = ({
     <Comment.Group>
       {messages.map(message => (
         <Message
-          key={message.username + message.date}
+          key={message._id}
           username={message.username}
           message={message.message}
           type={message.type}
