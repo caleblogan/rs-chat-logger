@@ -42,4 +42,4 @@ export default combineReducers({
 
 // Selectors
 export const messageStreamList = state =>
-  Object.keys(state.messageStream).map(id => state.messageStream[id]);
+  Object.keys(state.messageStream).map(id => state.messageStream[id]).reverse();

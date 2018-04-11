@@ -25,6 +25,9 @@ class Header extends Component {
           {/*/>*/}
           Rs Chat Logger
         </Menu.Item>
+        <Menu.Item as={Link} to="/messages">
+          Messages
+        </Menu.Item>
         <Menu.Item as={Link} to="/stream">
           Message Stream
         </Menu.Item>

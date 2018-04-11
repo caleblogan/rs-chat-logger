@@ -10,4 +10,4 @@ router.post('/', isAuthenticated, controller.create);
 router.get('/:id', controller.get);
 router.ws('/stream', sockController.stream);
 
-  module.exports = router;
+module.exports = router;

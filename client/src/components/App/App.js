@@ -6,6 +6,7 @@ import { Route, Link, Redirect } from 'react-router-dom';
 import Header from '../Header/Header';
 import Home from '../../scenes/Home/Home';
 import MessageStream from '../../scenes/MessageStream/MessageStream';
+import Messages from '../../scenes/Messages/Messages';
 import styles from './App.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         <Header />
         <div className={styles.MainContent}>
           <Route exact path="/" component={Home} />
+          <Route exact path="/messages" component={Messages} />
           <Route exact path="/stream" component={MessageStream} />
           <Route exact path="/rs-chat-logger/dist/" render={() => (
             <Redirect to="/" />

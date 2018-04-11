@@ -12,7 +12,15 @@ const {toMongoObjectId} = require("../helpers/utils");
  */
 
 function find(req, res) {
-  return Message.find()
+  let { offset, limit, sort='created_at', sort_order='asc', q } = req.query;
+  const textQuery = q ? {$text: {$search: q}} : {};
+  return Message
+    .find(textQuery)
+    .skip(Number(offset))
+    .limit(Number(limit))
+    .sort({
+      [sort]: sort_order.toLowerCase() === 'asc' ? 1 : -1
+    })
     .then(messages => {
       res.json(messages)
     });

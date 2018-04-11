@@ -11,6 +11,7 @@ const messageSchema = new Schema({
   world: Number,
   created_at: Date,
 });
+messageSchema.index({name: 'text', 'message': 'text', 'username': 'text'});
 
 messageSchema.pre('save', function(next) {
   const now = new Date();

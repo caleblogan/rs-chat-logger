@@ -22,7 +22,7 @@ class MessageStream extends Component {
 
   render() {
     return (
-      <Container style={{marginTop: '60px'}}>
+      <Container style={{marginTop: '20px'}}>
         <MessageList messages={this.props.messages}/>
       </Container>
     );
