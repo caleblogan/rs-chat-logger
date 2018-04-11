@@ -24,7 +24,7 @@ const defaultMessages = {
   },
 };
 
-function messageStream(state = defaultMessages, action) {
+function messageStream(state = {}, action) {
   switch (action.type) {
     case actionTypes.RECEIVE_MESSAGES:
       return {

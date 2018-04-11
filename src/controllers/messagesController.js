@@ -33,8 +33,9 @@ async function create(req, res) {
     world,
   });
   return message.save()
-    .then(data => {
-      res.json(data);
+    .then(message => {
+      req.wsClients.broadcast('/stream', message);
+      res.json(message);
     })
     .catch(error => {
       throw new ParseError(parseMongoError(error));
