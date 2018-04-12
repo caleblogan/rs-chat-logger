@@ -1,6 +1,8 @@
 import axios from 'axios';
+import qs from 'qs';
 
 import * as utils from './utils';
+import {transformPayload} from "./utils";
 
 const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8000/api/v1';
 
@@ -12,9 +14,8 @@ export const apiMiddleware = store => next => action => {
   if (typeof callAPI === 'undefined') {
     return next(action);
   }
-  throw new Error('Setup Api First dummy');
 
-  const { type, data, endpoint, method } = callAPI;
+  const { type, data, endpoint, method, query } = callAPI;
 
   console.log('api:', action);
 
@@ -40,10 +41,11 @@ export const apiMiddleware = store => next => action => {
     headers['Authorization'] = `Token ${token}`;
   }
 
+  const qString = query ? '?' + qs.stringify(query) : '';
   // return axios.get(API_BASE_URL + '/threads/').then(
   return axios({
     method,
-    url: API_BASE_URL + endpoint,
+    url: API_BASE_URL + endpoint + qString,
     data,
     headers
   })
@@ -51,7 +53,7 @@ export const apiMiddleware = store => next => action => {
       next(
         actionWith({
           type: `${type}_SUCCESS`,
-          data: response.data
+          payload: transformPayload(response.data, '_id'),
         })
       );
       return Promise.resolve(response);
@@ -63,6 +65,7 @@ export const apiMiddleware = store => next => action => {
           error: error.message || 'Error during api call'
         })
       );
+      // return Promise.reject(error);
     });
 
   // if (!api.isAuthed()) {

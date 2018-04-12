@@ -33,7 +33,7 @@ MessageStream.propTypes = {};
 
 function mapStateToProps(state) {
   return {
-    messages: selectors.messages.messageStreamList(state),
+    messages: selectors.messagestream.messageList(state),
   }
 }
 
