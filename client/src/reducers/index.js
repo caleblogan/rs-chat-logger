@@ -3,11 +3,13 @@ import { combineReducers } from 'redux';
 import authReducer, * as authSelectors from './auth';
 import messagestreamReducer, * as messagestreamSelectors from './messagestream';
 import messagesReducer, * as messagesSelectors from './messages';
+import topAccountsReducer, * as topAccountsSelectors from './topAccounts';
 
 export default combineReducers({
   auth: authReducer,
   messagestream: messagestreamReducer,
   messages: messagesReducer,
+  topAccounts: topAccountsReducer,
 });
 
 export const selectors = {
@@ -24,5 +26,9 @@ export const selectors = {
     search: state => messagesSelectors.search(state.messages),
     pagination: state => messagesSelectors.pagination(state.messages),
     isFetching: state => messagesSelectors.isFetching(state.messages),
+  },
+  topAccounts: {
+    list: state => topAccountsSelectors.list(state.topAccounts),
+    isFetching: state => topAccountsSelectors.isFetching(state.topAccounts),
   },
 };

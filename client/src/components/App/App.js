@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import Home from '../../scenes/Home/Home';
 import MessageStream from '../../scenes/MessageStream/MessageStream';
 import Messages from '../../scenes/Messages/Messages';
+import TopAccounts from '../../scenes/TopAccounts/TopAccounts';
 import styles from './App.css';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/messages" component={Messages} />
           <Route exact path="/stream" component={MessageStream} />
+          <Route exact path="/top-accounts" component={TopAccounts} />
           <Route exact path="/rs-chat-logger/dist/" render={() => (
             <Redirect to="/" />
           )}

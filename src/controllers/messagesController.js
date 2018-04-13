@@ -65,8 +65,19 @@ function get(req, res) {
     });
 }
 
+function messageCounts(req, res) {
+  return Message.aggregate()
+    .group({ _id: '$username', count: { $sum: 1 } })
+    .sort({'count': -1})
+    .limit(150)
+    .then(result => {
+      res.json(result);
+    });
+}
+
 module.exports = {
   find,
   create,
   get,
+  messageCounts,
 };

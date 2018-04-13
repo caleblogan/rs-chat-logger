@@ -31,6 +31,9 @@ class Header extends Component {
         <Menu.Item as={Link} to="/stream">
           Message Stream
         </Menu.Item>
+        <Menu.Item as={Link} to="/top-accounts">
+          Top Accounts
+        </Menu.Item>
       </Menu>
     );
   }
