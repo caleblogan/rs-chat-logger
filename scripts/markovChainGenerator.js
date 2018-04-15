@@ -7,7 +7,7 @@ const _ = require('lodash');
 
 const Message = require('../src/models/message');
 
-mongoose.connect('mongodb://localhost/rs-chat-logger');
+mongoose.connect(_.get(process.env, 'MONGODB_URI', 'mongodb://localhost/rs-chat-logger'));
 
 function messageList() {
   return Message.find()
