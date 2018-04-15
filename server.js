@@ -8,8 +8,6 @@ const _ = require('lodash');
 
 const mongoose = require('mongoose');
 mongoose.connect(_.get(process.env, 'MONGODB_URI', 'mongodb://localhost/rs-chat-logger'));
-console.log(process.env);
-console.log(_.get(process.env, 'MONGODB_URI', 'def'));
 
 const apiRoutes = require('./src/routes');
 const { http404Handler, errorHandler } = require('./src/helpers/middleware');
