@@ -6,6 +6,7 @@ import { Container, Menu } from 'semantic-ui-react';
 import styles from './Home.css';
 import WordCounts from "./WordCounts";
 import WordsOverTime from './WordsOverTime';
+import MarkovGenerator from './MarkovGenerator';
 
 class Home extends Component {
 
@@ -26,7 +27,9 @@ class Home extends Component {
       case 'wordCounts':
         return <WordCounts />;
       case 'wordsOverTime':
-        return <WordsOverTime />
+        return <WordsOverTime />;
+      case 'markov':
+        return <MarkovGenerator />;
       default:
         return undefined;
     }
@@ -39,6 +42,7 @@ class Home extends Component {
         <Menu pointing secondary>
           <Menu.Item name='wordCounts' active={activeItem === 'wordCounts'} onClick={this.handleItemClick}>Word Counts</Menu.Item>
           <Menu.Item name='wordsOverTime' active={activeItem === 'wordsOverTime'} onClick={this.handleItemClick}>Words Over Time</Menu.Item>
+          <Menu.Item name='markov' active={activeItem === 'markov'} onClick={this.handleItemClick}>Markov Generator</Menu.Item>
         </Menu>
         {this.renderActive()}
       </Container>
