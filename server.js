@@ -4,9 +4,10 @@ const expressWss = require('express-ws')(app);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
+const _ = require('lodash');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/rs-chat-logger');
+mongoose.connect(_.get(process.env, 'MONGODB_URI', 'mongodb://localhost/rs-chat-logger'));
 
 const apiRoutes = require('./src/routes');
 const { http404Handler, errorHandler } = require('./src/helpers/middleware');
