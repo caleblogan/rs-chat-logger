@@ -1,10 +1,11 @@
 import axios from 'axios';
 import qs from 'qs';
+import config from '../config';
 
 import * as utils from './utils';
 import {transformPayload} from "./utils";
 
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8000/api/v1';
+const { API_URL } = config.pick('API_URL');
 
 export const CALL_API = 'CALL_API';
 
@@ -45,7 +46,7 @@ export const apiMiddleware = store => next => action => {
   // return axios.get(API_BASE_URL + '/threads/').then(
   return axios({
     method,
-    url: API_BASE_URL + endpoint + qString,
+    url: API_URL + endpoint + qString,
     data,
     headers
   })

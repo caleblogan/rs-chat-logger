@@ -1,19 +1,17 @@
-# Permeon Client
-The client for permeon steem app.
+# Rs Chat Logger Client
+Client for chat logger api. Basic web app for viewing messages and a few chart.
 
+Live Site: http://rs-chat-logger.surge.sh/
 
-## Dev Setup
-- `git clone https://github.com/permeon/permeon-client.git && cd permeon-client`
-- `yarn install`
-- `yarn start` to run for dev
-- `yarn test` to run tests
-
-## Contributing
-- fork repo
+# Setup
+- `clone repo && cd rs-chat-logger/client`
 - `yarn install`
 - `yarn start`
-- create a new git branch with a name describing feature/fix `feature/upvote_downvote_comments`
-- make changes
-- run tests `yarn test`
-- run prettier `yarn prettier`
-- open a pull request to master
+
+# Prod
+- set config API_URL in config/prod.js
+- `yarn build`
+- push /dist to production server
+
+# Config
+all config settings are in src/config/
