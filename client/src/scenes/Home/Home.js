@@ -42,7 +42,7 @@ class Home extends Component {
         <Menu pointing secondary>
           <Menu.Item name='wordCounts' active={activeItem === 'wordCounts'} onClick={this.handleItemClick}>Word Counts</Menu.Item>
           <Menu.Item name='wordsOverTime' active={activeItem === 'wordsOverTime'} onClick={this.handleItemClick}>Words Over Time</Menu.Item>
-          <Menu.Item name='markov' active={activeItem === 'markov'} onClick={this.handleItemClick}>Markov Generator</Menu.Item>
+          <Menu.Item name='markov' active={activeItem === 'markov'} onClick={this.handleItemClick}>Markov</Menu.Item>
         </Menu>
         {this.renderActive()}
       </Container>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { HorizontalBar } from 'react-chartjs-2';
-import { Header } from 'semantic-ui-react';
+import { Header, Dimmer, Loader } from 'semantic-ui-react';
 import { fetchWordCounts } from "../../actions/chartActions";
 
 class WordCounts extends Component {
@@ -11,6 +11,7 @@ class WordCounts extends Component {
     this.state = {
       labels: [],
       data: [],
+      isLoading: false,
     };
 
   }
@@ -20,11 +21,15 @@ class WordCounts extends Component {
   }
 
   fetchData() {
+    this.setState({isLoading: true});
     this.props.dispatch(fetchWordCounts())
       .then(res => {
         let counts = res.data.map(item => item[0]);
         let labels = res.data.map(item => item[1]);
-        this.setState({data: counts, labels});
+        this.setState({data: counts, labels, isLoading: false});
+      })
+      .catch(error => {
+        this.setState({isLoading: false});
       })
   }
 
@@ -103,8 +108,10 @@ class WordCounts extends Component {
   }
 
   render() {
+    const { isLoading } = this.state;
     return (
       <div style={{height: '1500px'}}>
+        <Dimmer page active={isLoading}><Loader active={isLoading} size='big' /></Dimmer>
         <HorizontalBar stacked data={this.buildChartData()} options={this.buildChartOptions()} />
       </div>
     );

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Menu, Image, Icon, Input, Responsive } from 'semantic-ui-react';
 import MediaQuery from 'react-responsive';
 
 import { selectors } from '../../reducers';
+import HeaderMenu from "./HeaderMenu";
+import HeaderMenuMobile from "./HeaderMenuMobile";
 import styles from './Header.css';
 
 class Header extends Component {
@@ -14,30 +15,16 @@ class Header extends Component {
   }
 
   render() {
-
     return (
-      <Menu className={styles.Header} fixed="top" borderless>
-        <Menu.Item as={Link} to="/" header style={{borderLeft: '4px solid #511E7A'}}>
-          {/*<Image*/}
-          {/*size='mini'*/}
-          {/*src='/logo.png'*/}
-          {/*style={{ marginRight: '1.5em' }}*/}
-          {/*/>*/}
-          Rs Chat Logger
-        </Menu.Item>
-        <Menu.Item as={Link} to="/">
-          Visualizations
-        </Menu.Item>
-        <Menu.Item as={Link} to="/messages">
-          Messages
-        </Menu.Item>
-        <Menu.Item as={Link} to="/stream">
-          Message Stream
-        </Menu.Item>
-        <Menu.Item as={Link} to="/top-accounts">
-          Top Accounts
-        </Menu.Item>
-      </Menu>
+      <MediaQuery minWidth={700}>
+        {(matches) => {
+          if (matches) {
+            return <HeaderMenu isLoggedIn={this.props.isLoggedIn} />;
+          } else {
+            return <HeaderMenuMobile isLoggedIn={this.props.isLoggedIn} />;
+          }
+        }}
+      </MediaQuery>
     );
   }
 }

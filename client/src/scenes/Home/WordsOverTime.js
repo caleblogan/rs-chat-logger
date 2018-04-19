@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2';
-import { Header } from 'semantic-ui-react';
+import { Header, Dimmer, Loader } from 'semantic-ui-react';
 import {fetchWordCounts, fetchWordsOverTime} from "../../actions/chartActions";
 
 class WordsOverTime extends Component {
@@ -24,6 +24,7 @@ class WordsOverTime extends Component {
       ],
       // data: [[1, 4, 6], [3, 2, 1]],
       data: {},
+      isLoading: false,
     };
   }
 
@@ -32,12 +33,16 @@ class WordsOverTime extends Component {
   }
 
   fetchData() {
+    this.setState({isLoading: true});
     this.props.dispatch(fetchWordsOverTime())
       .then(response => {
         console.log('resp:', response);
         const { labels, words } = response.data;
-        this.setState({ labels, data: words });
-      });
+        this.setState({ labels, data: words, isLoading: false });
+      })
+      .catch(error => {
+        this.setState({isLoading: false});
+      })
   }
 
   getColor(idx) {
@@ -103,8 +108,10 @@ class WordsOverTime extends Component {
   }
 
   render() {
+    const { isLoading } = this.state;
     return (
       <div style={{height: '600px'}}>
+        <Dimmer page active={isLoading}><Loader active={isLoading} size='big' /></Dimmer>
         <Line data={this.buildChartData()} options={this.buildChartOptions()} />
       </div>
     );
